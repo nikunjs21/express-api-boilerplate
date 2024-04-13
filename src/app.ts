@@ -15,7 +15,8 @@ import ApiError from './utils/ApiError';
 const app = express();
 
 if (config.env !== 'test') {
-  // app.use(morgan)
+  app.use(morgan.successHandler);
+  app.use(morgan.errorHandler);
 }
 
 // set security HTTP headers
