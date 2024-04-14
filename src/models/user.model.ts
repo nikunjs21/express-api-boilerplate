@@ -16,6 +16,8 @@ interface IUser {
   isEmailVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
+  isPasswordMatch: Function;
+  isEmailTaken: Function;
 }
 
 const userSchema = new mongoose.Schema<IUser>(

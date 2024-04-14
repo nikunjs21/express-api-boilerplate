@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import Joi from 'joi';
+import { ConnectOptions } from 'mongoose';
 
 dotenv.config({
   path: path.join(__dirname, '../../.env'),
@@ -34,16 +35,24 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
+interface mongooseConnectionOptions extends ConnectOptions {
+  useCreateIndex: boolean;
+  useNewUrlParser: boolean;
+  useUnifiedTopology: boolean;
+}
+
+let mConOptions: mongooseConnectionOptions = {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
+
 export default {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
     url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
-    options: {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
+    options: mConOptions,
   },
   jwt: {
     secret: envVars.JWT_SECRET,
