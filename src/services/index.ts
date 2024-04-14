@@ -1,7 +1,7 @@
-import authService from './auth.service';
-import emailService from './email.service';
-import tokenService from './token.service';
-import userService from './user.service';
+import authService from './auth.service.js';
+import emailService from './email.service.js';
+import tokenService from './token.service.js';
+import userService from './user.service.js';
 
 export default {
   authService,

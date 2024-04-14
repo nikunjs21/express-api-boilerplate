@@ -1,5 +1,5 @@
-import authController from './auth.controller';
-import userController from './user.controller';
+import authController from './auth.controller.js';
+import userController from './user.controller.js';
 // export const authController =
 export default {
   authController,

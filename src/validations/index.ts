@@ -1,5 +1,5 @@
-import authValidation from './auth.validation';
-import userValidation from './user.validation';
+import authValidation from './auth.validation.js';
+import userValidation from './user.validation.js';
 
 export default {
   authValidation,

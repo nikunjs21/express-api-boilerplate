@@ -1,7 +1,7 @@
 import { Strategy as JwtStrategy, ExtractJwt, StrategyOptionsWithoutRequest, VerifyCallback } from 'passport-jwt';
-import config from './config';
-import tokenTypes from './tokens';
-import User from '../models/user.model';
+import config from './config.js';
+import tokenTypes from './tokens.js';
+import User from '../models/user.model.js';
 
 const jwtOptions: StrategyOptionsWithoutRequest = {
   secretOrKey: config.jwt.secret,

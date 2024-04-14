@@ -2,9 +2,14 @@ import dotenv from 'dotenv';
 import path from 'path';
 import Joi from 'joi';
 import { ConnectOptions } from 'mongoose';
+import { fileURLToPath } from 'url';
+
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
+export const envPath = path.join(__dirname, '../../.env');
 
 dotenv.config({
-  path: path.join(__dirname, '../../.env'),
+  path: envPath,
 });
 
 const envVarsSchema: Joi.ObjectSchema<any> = Joi.object()

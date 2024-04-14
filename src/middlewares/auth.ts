@@ -1,20 +1,26 @@
-const passport = require('passport');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const { roleRights } = require('../config/roles');
+import passport from 'passport';
+import httpStatus from 'http-status';
+import ApiError from '../utils/ApiError.js';
+import roles from '../config/roles.js';
+import { IUser } from '../models/user.model.js';
+
+const { roleRights } = roles;
 
 const verifyCallback =
-  (req: any, resolve: any, reject: any, requiredRights: any) => async (err: any, user: any, info: any) => {
+  (req: any, resolve: any, reject: (error: ApiError) => void, requiredRights: string[]) =>
+  async (err: Error | null, user: IUser | null, info: any): Promise<void> => {
     if (err || info || !user) {
       return reject(new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate'));
     }
     req.user = user;
 
     if (requiredRights.length) {
-      const userRights = roleRights.get(user.role);
-      const hasRequiredRights = requiredRights.every((requiredRight: any) => userRights.includes(requiredRight));
-      if (!hasRequiredRights && req.params.userId !== user.id) {
-        return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));
+      const userRights = roleRights.get(user.role) || [];
+      if (userRights && userRights.length) {
+        const hasRequiredRights = requiredRights.every((requiredRight: string) => userRights.includes(requiredRight));
+        if (!hasRequiredRights && req.params.userId !== user.id) {
+          return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));
+        }
       }
     }
 

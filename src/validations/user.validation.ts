@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import customValidations from './custom.validation';
+import customValidations from './custom.validation.js';
 const { password, objectId } = customValidations;
 
 const createUser = {

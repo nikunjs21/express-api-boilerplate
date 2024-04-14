@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
-import models from "../models";
-import ApiError from "../utils/ApiError";
+import models from "../models/index.js";
+import ApiError from "../utils/ApiError.js";
 
 const { User } = models;
 /**

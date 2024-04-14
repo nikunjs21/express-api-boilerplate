@@ -1,5 +1,5 @@
-import toJSON from './toJSON.plugin';
-import paginate from './paginate.plugin';
+import toJSON from './toJSON.plugin.js';
+import paginate from './paginate.plugin.js';
 
 export default {
   toJSON,

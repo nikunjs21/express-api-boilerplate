@@ -1,13 +1,13 @@
 import mongoose, { Document, Model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import plugins from './plugins';
-import rolesObj from '../config/roles';
+import plugins from './plugins/index.js';
+import rolesObj from '../config/roles.js';
 
 const { toJSON, paginate } = plugins;
 const { roles } = rolesObj;
 
-interface IUser extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
