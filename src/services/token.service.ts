@@ -6,6 +6,7 @@ import userService from './user.service';
 import models from '../models';
 import ApiError from '../utils/ApiError';
 import tokenTypes from '../config/tokens';
+import { ObjectId } from 'mongodb';
 
 const { Token } = models;
 
@@ -55,7 +56,8 @@ const saveToken = async (token: string, userId: any, expires: moment.Moment, typ
  */
 const verifyToken = async (token: string, type: string) => {
   const payload = jwt.verify(token, config.jwt.secret);
-  const tokenDoc = await Token.findOne({ token, type, user: payload.sub ? payload.sub : undefined, blacklisted: false });
+  const userId = payload.sub ? new ObjectId(String(payload.sub)) : undefined;
+  const tokenDoc = await Token.findOne({ token, type, user: userId, blacklisted: false });
   if (!tokenDoc) {
     throw new Error('Token not found');
   }

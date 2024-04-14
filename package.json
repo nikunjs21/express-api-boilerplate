@@ -9,7 +9,8 @@
     "dev": "ts-node-dev --clear index.ts",
     "dev2": "cross-env NODE_ENV=development nodemon index.js",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "dev3": "tsc -w & nodemon dist/index.js"
   },
   "keywords": [],
   "author": "",

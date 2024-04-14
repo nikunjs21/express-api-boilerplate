@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import plugins from './plugins';
@@ -7,7 +7,7 @@ import rolesObj from '../config/roles';
 const { toJSON, paginate } = plugins;
 const { roles } = rolesObj;
 
-interface IUser {
+interface IUser extends Document {
   name: string;
   email: string;
   password: string;
@@ -16,8 +16,13 @@ interface IUser {
   isEmailVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
-  isPasswordMatch: Function;
-  isEmailTaken: Function;
+
+  isPasswordMatch(password: string): Promise<boolean>;
+}
+
+interface IUserModel extends Model<IUser> {
+  isEmailTaken(email: string, excludeUserId?: mongoose.Types.ObjectId): Promise<boolean>;
+  paginate(filter: any, options: any): Promise<any>; // Define more precisely if possible
 }
 
 const userSchema = new mongoose.Schema<IUser>(
@@ -111,6 +116,6 @@ userSchema.pre('save', async function (next) {
 /**
  * @typedef User
  */
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IUser, IUserModel>('User', userSchema);
 
 export default User;
