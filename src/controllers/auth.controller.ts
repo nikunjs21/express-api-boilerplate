@@ -13,6 +13,7 @@ const login = catchAsync(async (req: any, res: any) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
+  // TODO: remove password keyword while sending the response
   res.send({ user, tokens });
 });
 
