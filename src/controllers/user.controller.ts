@@ -7,6 +7,7 @@ import services from '../services/index.js';
 const { userService } = services;
 
 const createUser = catchAsync(async (req: any,res: any) => {
+  // console.log("Create User Controller");
   const user = await userService.createUser(req.body);
   res.status(httpStatus.CREATED).send(user);
 });
