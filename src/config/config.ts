@@ -41,15 +41,15 @@ if (error) {
 }
 
 interface mongooseConnectionOptions extends ConnectOptions {
-  useCreateIndex: boolean;
-  useNewUrlParser: boolean;
-  useUnifiedTopology: boolean;
+  // useCreateIndex: boolean;
+  // useNewUrlParser: boolean;
+  // useUnifiedTopology: boolean;
 }
 
 let mConOptions: mongooseConnectionOptions = {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useCreateIndex: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
 }
 
 export default {
