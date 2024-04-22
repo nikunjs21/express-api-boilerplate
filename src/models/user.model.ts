@@ -3,6 +3,7 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import plugins from './plugins/index.js';
 import rolesObj from '../config/roles.js';
+import { emailRegex } from '../constants/regex.constants.js';
 
 const { toJSON, paginate } = plugins;
 const { roles } = rolesObj;
@@ -52,7 +53,7 @@ const userSchema = new mongoose.Schema<IUser>(
       minlength: 8,
       maxlength: 30,
       validate(value: string) {
-        if (!value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/)) {
+        if (!value.match(emailRegex)) {
           throw new Error(
             'Password should have minimum 8 and maximum 30 characters length, at least one uppercase letter, one lowercase letter, one number and one special character.',
           );

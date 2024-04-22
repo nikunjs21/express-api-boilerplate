@@ -1,3 +1,14 @@
+Running locally:
+
+```bash
+npm run dev
+```
+
+Build:
+```bash
+npm run build
+```
+
 ### API Endpoints
 
 List of available routes:
@@ -17,3 +28,5 @@ List of available routes:
 `GET /v1/users/:userId` - get user\
 `PATCH /v1/users/:userId` - update user\
 `DELETE /v1/users/:userId` - delete user
+
+Converted https://github.com/hagopj13/node-express-boilerplate in Typescript
